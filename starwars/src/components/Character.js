@@ -1,46 +1,46 @@
 // Write your Character component here
-import React from "react"
-import Styled from "styled-components"
+import React, {useEffect} from 'react'
+import styled from 'styled-components'
+import Movie from './Movie'
 
-import ArrowButton from "./ArrowButton"
 
-const StyledCharacter = Styled.div`
-    display: flex;
-    flex-flow: row nowrap;
-    justify-content: space-between;
-    border: solid #222;
-    box-shadow: 1px 1px 2px;
-    align-items: center;
-    margin-bottom: 6.3%;
-    
-    li {
-        width: 100%;
-    }
-    h2 {
-        align-items: flex-start;
-        opacity: 168%;
-    }
-    p {
-        font-weight: bold;
-        opacity: 73%;
-        text-align: center;
-        margin-right: 5%;
-        font-style: {&.innertext === "undefined"? "italic" : "normal"}
+//component styling
+const StyledCharacter = styled.div`
+    width: 70%;
+    border: 1px solid gray;
+    background-color: white;
+    margin: 0 auto; 
+    .movie-list{
+        display: flex;
+        margin: 2%;
+        flex-wrap: wrap;
     }
 `
 
-export default function Character ({character}) {
+const Character = props => {
+
+    const { info } = props
 
     return (
-        <StyledCharacter>
-            <li>
-                <h2>{character.name}</h2>
-                <p> {character.birth_year}</p>
-                <br/>
-                <ArrowButton/>
-                {/* <AdditionalInformation}/> */}
-                {/* {Related members of the arcana: if } */}
-            </li>
+          <StyledCharacter>
+            <h2>{info.name}</h2>
+            <div className='info-container'>
+                <p>Gender: {info.gender}</p>
+                <p>Height: {info.height}</p>
+                <p>Mass: {info.mass}</p>
+                <p>Birth Year: {info.birth_year}</p>
+            </div>
+            <div className= 'movie-list'>
+            {info.films.map(star => {
+          return <Movie key={star} info={star.slice(27,28)} />
+        })}
+            </div>
+            
         </StyledCharacter>
-    )
+        
+        
+        
+        )
 }
+
+export default Character
